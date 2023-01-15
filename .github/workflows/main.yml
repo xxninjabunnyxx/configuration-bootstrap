@@ -7,17 +7,20 @@ on:
     branches: [ "main" ]
 
 jobs:
-  docker:
+  Docker:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
-    - name: Docker Login
-      env:
-        DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
-        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-      run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-    - name: Build Docker Image
-      run: docker build . --tag xxninjabunnyxx/configuration-bootstrap:$(date +%s)
-    - name: Docker Push
-      run: docker push xxninjabunnyxx/configuration-bootstrap
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: xxninjabunnyxx/configuration-bootstrap:latest, xxninjabunnyxx/configuration-bootstrap:${{ steps.date.outputs.date }}
