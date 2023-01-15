@@ -10,8 +10,6 @@ jobs:
   Docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Login to Docker Hub
@@ -19,8 +17,10 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-      - name: Build and push
+      - name: Create Tag
+        run: echo "TAG=date +%m-%d-%Y" >> $GITHUB_ENV
+      - name: Build and Push
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: xxninjabunnyxx/configuration-bootstrap:latest, xxninjabunnyxx/configuration-bootstrap:${{ steps.date.outputs.date }}
+          tags: xxninjabunnyxx/configuration-bootstrap:latest, xxninjabunnyxx/configuration-bootstrap:${{ env.TAG }}
