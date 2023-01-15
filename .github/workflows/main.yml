@@ -18,7 +18,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: Create Tag
-        run: echo "TAG=date +%m-%d-%Y" >> $GITHUB_ENV
+        run: echo "TAG=$(date +%m-%d-%Y)" >> $GITHUB_ENV
       - name: Build and Push
         uses: docker/build-push-action@v3
         with:
