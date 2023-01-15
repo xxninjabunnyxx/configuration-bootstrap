@@ -1,0 +1,35 @@
+{
+  "name": "home-lab-configuration-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "format": "prettier --write \"**/*.+(js|json|ts)\"",
+    "copy-public": "copyfiles -u 1 ./public/*.html ./public/*.css dist/public",
+    "copy-scripts": "copyfiles -u 1 ./src/scripts/**/*.sh dist/scripts",
+    "copy-files": "copyfiles -u 1 ./src/files/**/* dist/files",
+    "tsc": "npx tsc",
+    "watch": "npx tsc -w",
+    "start": "npm run tsc && npm run copy-public && npm run copy-scripts && npm run copy-files && node ./dist/index.js",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xxninjabunnyxx/home-lab-configuration-server.git"
+  },
+  "author": "xxninjabunnyxx",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xxninjabunnyxx/home-lab-configuration-server/issues"
+  },
+  "homepage": "https://github.com/xxninjabunnyxx/home-lab-configuration-server#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "husky": "^7.0.4",
+    "prettier": "^2.5.1",
+    "typescript": "^4.5.4"
+  }
+}
