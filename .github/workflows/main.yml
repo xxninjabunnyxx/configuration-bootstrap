@@ -23,4 +23,4 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: xxninjabunnyxx/configuration-bootstrap:latest, xxninjabunnyxx/configuration-bootstrap:${{ env.TAG }}
+          tags: xxninjabunnyxx/configuration-bootstrap:${{ env.TAG }}, xxninjabunnyxx/configuration-bootstrap:latest
