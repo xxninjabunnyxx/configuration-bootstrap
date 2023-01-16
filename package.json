@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/xxninjabunnyxx/home-lab-configuration-server#readme",
   "dependencies": {
+    "copyfiles": "^2.4.1",
     "express": "^4.17.2"
   },
   "devDependencies": {
